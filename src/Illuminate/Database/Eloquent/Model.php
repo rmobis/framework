@@ -1240,7 +1240,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	public function hasGetMutator($key)
 	{
-		return method_exists($this, 'get'.camel_case($key).'Attribute');
+		return method_exists($this, 'get'.studly_case($key).'Attribute');
 	}
 
 	/**
@@ -1252,7 +1252,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	protected function mutateAttribute($key, $value)
 	{
-		return $this->{'get'.camel_case($key).'Attribute'}($value);
+		return $this->{'get'.studly_case($key).'Attribute'}($value);
 	}
 
 	/**
@@ -1269,7 +1269,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 		// the model, such as "json_encoding" an listing of data for storage.
 		if ($this->hasSetMutator($key))
 		{
-			$method = 'set'.camel_case($key).'Attribute';
+			$method = 'set'.studly_case($key).'Attribute';
 
 			return $this->{$method}($value);
 		}
@@ -1296,7 +1296,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	public function hasSetMutator($key)
 	{
-		return method_exists($this, 'set'.camel_case($key).'Attribute');
+		return method_exists($this, 'set'.studly_case($key).'Attribute');
 	}
 
 	/**
@@ -1512,9 +1512,9 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 
 		if (isset(static::$mutatorCache[$class]))
 		{
-			return static::$mutatorCache[get_class($this)];			
+			return static::$mutatorCache[get_class($this)];
 		}
-		
+
 		return array();
 	}
 
